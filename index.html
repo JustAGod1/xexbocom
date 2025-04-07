@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ошибка 418 - Я чайник</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #0f0;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 20px;
+      background-image: url('https://i.imgur.com/Jj7qPZP.png');
+      background-size: 30%;
+      background-blend-mode: overlay;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      border: 3px dashed #f0f;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #f00;
+      text-shadow: 0 0 5px #fff;
+      animation: glitch 1s linear infinite;
+    }
+
+    .blink {
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3px, 3px); }
+      40% { transform: translate(-3px, -3px); }
+      60% { transform: translate(3px, 3px); }
+      80% { transform: translate(3px, -3px); }
+      100% { transform: translate(0); }
+    }
+
+    button {
+      background-color: #333;
+      color: #0f0;
+      border: 1px solid #f0f;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background-color: #f0f;
+      color: #000;
+      transform: scale(1.1);
+    }
+
+    .pixel-cat {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      width: 100px;
+      image-rendering: pixelated;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .progress-bar {
+      width: 100%;
+      background-color: #333;
+      margin: 20px 0;
+    }
+
+    .progress {
+      width: 0%;
+      height: 30px;
+      background-color: #f0f;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+      transition: width 0.5s;
+    }
+
+    .fake-link {
+      color: #0ff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .fake-link:hover {
+      color: #f0f;
+    }
+
+    .console {
+      background-color: #000;
+      border: 2px solid #0f0;
+      padding: 10px;
+      height: 150px;
+      overflow-y: scroll;
+      margin: 20px 0;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <img src="https://i.imgur.com/VkG6FZJ.png" alt="Кот-баг" class="pixel-cat">
+  <h1>ОШИБКА 418 - Я ЧАЙНИК</h1>
+  <p>Добро пожаловать, сталкрафтер! Похоже, ты <span class="blink">НЕ ТУДА</span> кликнул.</p>
+
+  <div class="console" id="console">
+    > Инициализация бамбузл-протокола...<br>
+    > Загрузка артефактов...<br>
+    > Обнаружен пользователь с IP: ***.***.***.***<br>
+    > Координаты: 56.8340° N, 60.6124° E<br>
+    > Внимание! Обнаружена аномалия!<br>
+  </div>
+
+  <p>Мы заметили, что ты пытался перейти на <span class="fake-link" id="fakeLink">внутренние ресурсы сталкрафта</span>, но вместо этого попал сюда. Это не случайность.</p>
+
+  <div class="progress-bar">
+    <div class="progress" id="progress">0%</div>
+  </div>
+
+  <p>Пока мы пытаемся исправить эту "ошибку", ответь на несколько вопросов:</p>
+
+  <div id="react-root"></div>
+
+  <p>Если ты действительно хочешь уйти, попробуй нажать эту кнопку:</p>
+  <button id="escapeButton">ВЕРНУТЬСЯ НАЗАД</button>
+  <p id="escapeMessage" style="display: none;">Ха-ха, нет. Ты теперь с нами.</p>
+</div>
+
+<!-- React компоненты -->
+<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+  function BizarreForm() {
+    const [questionIndex, setQuestionIndex] = React.useState(0);
+    const [answers, setAnswers] = React.useState([]);
+
+    const questions = [
+      "Как часто ты теряешь артефакты из-за мутантов?",
+      "Ты действительно веришь, что сталкрафт - это просто игра?",
+      "Сколько раз ты умирал от аномалий сегодня?",
+      "Какой твой любимый способ потерять весь лут?",
+      "Ты уверен, что хочешь уйти с этой страницы?"
+    ];
+
+    const bizarreAnswers = [
+      "Каждый раз, когда закрываю глаза",
+      "Это не игра, это образ жизни",
+      "Да",
+      "Забыть сохраниться перед вылетом",
+      "Нет, я хочу остаться здесь навсегда"
+    ];
+
+    const handleAnswer = () => {
+      setAnswers([...answers, bizarreAnswers[questionIndex]]);
+      if (questionIndex < questions.length - 1) {
+        setQuestionIndex(questionIndex + 1);
+      } else {
+        // Все вопросы отвечены
+        document.getElementById('progress').style.width = '100%';
+        document.getElementById('progress').innerText = '100%';
+
+        // Добавляем сообщение в консоль
+        const consoleElem = document.getElementById('console');
+        consoleElem.innerHTML += '> Опрос завершен. Пользователь теперь наш.<br>';
+        consoleElem.scrollTop = consoleElem.scrollHeight;
+      }
+    };
+
+    return (
+            <div>
+              <h3>{questions[questionIndex]}</h3>
+              <button onClick={handleAnswer}>
+                {bizarreAnswers[questionIndex]}
+              </button>
+              <p>Ответов дано: {answers.length}/{questions.length}</p>
+            </div>
+    );
+  }
+
+  ReactDOM.render(<BizarreForm />, document.getElementById('react-root'));
+</script>
+
+<script>
+  // Прогресс бар
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    if (progress < 90) {
+      progress += Math.random() * 10;
+      if (progress > 90) progress = 90;
+      document.getElementById('progress').style.width = progress + '%';
+      document.getElementById('progress').innerText = Math.floor(progress) + '%';
+    }
+  }, 500);
+
+  // Фейковая ссылка
+  document.getElementById('fakeLink').addEventListener('click', function() {
+    alert('Сервер не отвечает. Попробуйте позже. Или не пробуйте.');
+
+    // Добавляем сообщение в консоль
+    const consoleElem = document.getElementById('console');
+    consoleElem.innerHTML += '> Пользователь попытался сбежать. Блокирую выход...<br>';
+    consoleElem.scrollTop = consoleElem.scrollHeight;
+  });
+
+  // Кнопка выхода
+  document.getElementById('escapeButton').addEventListener('click', function() {
+    document.getElementById('escapeMessage').style.display = 'block';
+    this.disabled = true;
+    this.textContent = 'Неа :)';
+
+    // Добавляем сообщение в консоль
+    const consoleElem = document.getElementById('console');
+    consoleElem.innerHTML += '> Попытка побега предотвращена.<br>';
+    consoleElem.innerHTML += '> Активирую протокол "Вечный сталкрафтер"...<br>';
+    consoleElem.scrollTop = consoleElem.scrollHeight;
+
+    // Запускаем безумную анимацию
+    document.body.style.animation = 'glitch 0.1s linear infinite';
+    setTimeout(() => {
+      document.body.style.animation = '';
+    }, 1000);
+  });
+
+  // Периодически добавляем сообщения в консоль
+  setInterval(() => {
+    const messages = [
+      "Сканирование инвентаря...",
+      "Обнаружено 3 артефакта и 2 банки тушенки",
+      "Аномалия 'Бамбузл' активирована",
+      "Внимание! Обнаружен читерский софт: 'Чит на фарм артов'",
+      "Перезагрузка матрицы сталкрафта...",
+      "Ошибка доступа к серверу сталкрафта",
+      "Попытка подключения к сталкрафт-чату... провал",
+      "Запускаю вирус 'Вечный сталкрафтер'"
+    ];
+
+    const consoleElem = document.getElementById('console');
+    consoleElem.innerHTML += '> ' + messages[Math.floor(Math.random() * messages.length)] + '<br>';
+    consoleElem.scrollTop = consoleElem.scrollHeight;
+  }, 3000);
+</script>
+</body>
+</html>
