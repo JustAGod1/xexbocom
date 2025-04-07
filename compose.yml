@@ -9,7 +9,7 @@ services:
     labels:
       - "traefik.enable=true"
       # xexbo
-      - "traefik.http.routers.web.rule=Host(`xexbo.com`,`mm.xexbo.com`,`hub.xexbo.com`)"
+      - "traefik.http.routers.web.rule=Host(`xexbo.com`) || Host(`mm.xexbo.com`) || Host(`hub.xexbo.com`)"
       - "traefik.http.routers.web.entrypoints=websecure"
       - "traefik.http.routers.web.tls.certresolver=myresolver"
       - "traefik.http.services.web.loadbalancer.server.port=80"
