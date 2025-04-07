@@ -15,13 +15,6 @@ services:
       - "traefik.http.services.web.loadbalancer.server.port=80"
       - "traefik.http.middlewares.web.redirectscheme.scheme=https"
       - "traefik.http.middlewares.web.redirectscheme.permanent=true"
-      # mm.xexbo
-      - "traefik.http.routers.web_mm.rule=Host(`mm.xexbo.com`)"
-      - "traefik.http.routers.web_mm.entrypoints=websecure"
-      - "traefik.http.routers.web_mm.tls.certresolver=myresolver"
-      - "traefik.http.services.web_mm.loadbalancer.server.port=80"
-      - "traefik.http.middlewares.web_mm.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.web_mm.redirectscheme.permanent=true"
     depends_on:
       - traefik
 
